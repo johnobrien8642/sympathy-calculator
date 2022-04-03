@@ -1,12 +1,31 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useScreenshot, createFileName } from 'use-react-screenshot'
 import Head from 'next/head'
 
 export default function Home() {
   let [text, setText] = useState('')
   let [sq, setSQ] = useState('')
   let [maxChars, setMaxChars] = useState(false)
-  let [active, setActive] = useState(false)
+  let sqScorePanelRef = useRef(null)
+  const [image, takeScreenshot] = useScreenshot({
+    type: "image/jpeg",
+    quality: 1.0
+  })
+  const download = (image, { name =  `sq-score-${sq + '-' + Date.now()}`, extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+  const getImage = () => takeScreenshot(sqScorePanelRef.current).then(download)
 
+
+  useEffect(() => {
+    if (sq) {
+      sqScorePanelRef.current.scrollIntoView()
+    }
+  }, [sq])
+  
   return (
     <div className={`main-page container`}>
       <Head>
@@ -28,8 +47,11 @@ export default function Home() {
         </p>
         <p>
           That's where the Sympathy Calculator comes in to play. Simply describe your situation
-          in the text box below and hit calculate. The system will analyze what you wrote and
-          return an SQ score. SQ stands for Sympathy Quotient.
+          in the text box below and hit calculate. Our A.I. will analyze your text and calculate you a
+          Sympathy Quotient (SQ) score.
+        </p>
+        <p>
+          Afterwards, you can take a screenshot of your SQ score and attach it to your post.
         </p>
       </header>
 
@@ -40,18 +62,19 @@ export default function Home() {
           className='calculator-form'
           onSubmit={async (e) => {
             e.preventDefault()
-            if (!maxChars) {
-              const SQ = await fetch('/api/calculate_sq', {
+            if (text && !maxChars) {
+              const res = await fetch('/api/calculate_sq_score', {
                 method: 'POST',
                 headers: {
                   Accept: 'application/json',
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ 
-                  text: text
+                  text: text.toLowerCase()
                 })
               })
-              setSQ(SQ)
+              const SQ = await res.json()
+              setSQ(SQ.score)
             }
           }}
         >
@@ -68,6 +91,7 @@ export default function Home() {
             }}
           ></textarea>
           <button
+            className='btn btn-secondary'
             disabled={`${maxChars ? 'disabled' : ''}`}
           >
             Calculate
@@ -80,14 +104,28 @@ export default function Home() {
         </form>
       </div>
 
-      <div
-        className={`${active ? 'active ' : ''}sq-score container`}
+      <button
+        className={`btn btn-secondary screenshot-btn ${sq ? 'active' : ''}`}
+        onClick={getImage}
       >
-        <span>{sq}</span><span>SQ</span>
+        Take Screenshot
+      </button>
+
+      <div
+        className={`sq-score-panel ${sq ? 'active' : ''} container`}
+        ref={sqScorePanelRef}
+      >
         <p>
-          Your Sympathy Quotient for your situation is {sq}SQ.
-          This is how much sympathy you deserve. You are now ready
-          to request this amount of sympathy from the people around you.
+          The amount of sympathy deserved is:
+        </p>
+        <p><span className='sq-num'>{sq}</span><span className='sq-text'>SQ</span></p>
+        <p className='sq-explainer'>(Sympathy Quotient)</p>
+        <p>
+          Certified by the NCQAHS 
+        </p>
+        <p className='consortium-name'>(National Consortium for the Quantification of All Human Suffering)</p>
+        <p>
+          sympathycalculator.com
         </p>
       </div>
     </div>

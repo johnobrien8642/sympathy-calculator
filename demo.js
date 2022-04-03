@@ -17,6 +17,7 @@ const add = (test) => {
   let keys = Object.keys(matchObject)
   const regex = new RegExp('\\b' + keys.join('\\b|\\b') + '\\b', 'gm')
   const matches = test.match(regex)
+
   matches.forEach(match => {
     num += matchObject[match].value
   })

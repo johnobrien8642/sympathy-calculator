@@ -1,11 +1,24 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+:root {
+  --sq-blue: hsla(239, 76%, 49%, 1);
+  --lighter-blue: hsla(239, 76%, 72%, 1);
+}
 
 html, body, #__next {
   height: 100%;
+  background: linear-gradient(180deg, var(--lighter-blue), white);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .main-page {
   height: 100%;
+  overflow: auto;
 }
 
 .header {
@@ -17,22 +30,69 @@ html, body, #__next {
 
 .calculator {
   height: 50%;
-  margin-top: 10%;
+  margin-top: 5%;
 
   .calculator-form {
     height: 80%;
   
+    button {
+      margin-right: 1%;
+    }
+    
     .text-input {
       height: 80%;
     }
   }
 }
 
-.sq-score {
-  opacity: 0;
-  transition: opacity 500ms;
+.sq-score-panel {
+  display: none;
+  font-size: 1.6rem;
+  letter-spacing: .1rem;
+  border: 5px solid black;
+  text-align: center;
+  width: 90%;
+  margin-top: 4%;
+  margin-bottom: 5%;
+  background: linear-gradient(135deg, var(--lighter-blue), white);
 
-  .active {
-    opacity: 1;
+  p {
+    margin-bottom: 0;
   }
+
+  .sq-num {
+     margin-right: 2%;
+  }
+
+  .sq-num, .sq-text {
+    font-size: 3rem;
+  }
+
+  .sq-explainer, .consortium-name {
+    font-size: .7rem;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .sq-score-panel {
+    width: 80%;
+  }
+}
+
+.sq-score-panel.active {
+  display: block;
+}
+
+.screenshot-btn {
+  display: none;
+  margin: 0 auto;
+}
+
+.screenshot-btn.active {
+  display: block;
+}
+
+.sq-text {
+  font-family: 'Alfa Slab One', 'cursive';
+  color: var(--sq-blue);
 }
