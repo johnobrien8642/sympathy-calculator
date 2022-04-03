@@ -26,14 +26,24 @@ body {
 
 .main-content {
   
+  h1, h4 {
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 3%;
+  }
+
   h1 {
     width: fit-content;
-    margin: 5% auto;
+    margin-top: 5%;
   }
 
   p {
     background-color: white;
     padding: 1%;
+
+    .italicize {
+      font-style: italic;
+    }
   }
 }
 

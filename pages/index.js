@@ -40,6 +40,7 @@ export default function Home() {
         className='main-content container-md'
       >
         <h1>Sympathy Calculator</h1>
+        <h4>English only at this time.</h4>
         <p>
           Have you been suffering? Would you like some Sympathy? Wouldn't it be nice to know
           exactly how much Sympathy you should receive for your given situation?
@@ -57,6 +58,9 @@ export default function Home() {
           Example: "I woke up this morning depressed. I have a bad back. On the way to the toilet,
           I stubbed my toe. I was devestated." Currently, this will be around 200 SQ, depending upon quantitative 
           variations.
+        </p>
+        <p>
+          <span className='italicize'>Spelling is important to receive the most accurate calculation.</span>
         </p>
       </main>
 
