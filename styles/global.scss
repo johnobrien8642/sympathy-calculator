@@ -8,6 +8,9 @@
 
 html, body, #__next {
   height: 100%;
+}
+
+body {
   background: linear-gradient(180deg, var(--lighter-blue), white);
 }
 
@@ -21,10 +24,16 @@ html, body, #__next {
   overflow: auto;
 }
 
-.header {
+.main-content {
+  
   h1 {
     width: fit-content;
     margin: 5% auto;
+  }
+
+  p {
+    background-color: white;
+    padding: 1%;
   }
 }
 

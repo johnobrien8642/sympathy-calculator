@@ -36,8 +36,8 @@ export default function Home() {
         />
       </Head>
       
-      <header
-        className='header container-md'
+      <main
+        className='main-content container-md'
       >
         <h1>Sympathy Calculator</h1>
         <p>
@@ -46,13 +46,19 @@ export default function Home() {
         </p>
         <p>
           That's where the Sympathy Calculator comes in to play. Simply describe your situation
-          in the text box below and hit calculate. Our A.I. will analyze your text and calculate you a
+          in the text box below and hit calculate. Our A.I. will analyze your text and calculate a
           Sympathy Quotient (SQ) score.
         </p>
         <p>
-          Afterwards, you can take a screenshot of your SQ score and attach it to your post.
+          Afterwards you'll receive an certificate with your SQ score. You can copy this certificate
+          and attach it to your post, or share it with family and friends.
         </p>
-      </header>
+        <p>
+          Example: "I woke up this morning depressed. I have a bad back. On the way to the toilet,
+          I stubbed my toe. I was devestated." Currently, this will be around 200 SQ, depending upon quantitative 
+          variations.
+        </p>
+      </main>
 
       <div
         className='calculator container-md'
@@ -113,7 +119,7 @@ export default function Home() {
         className={`btn btn-secondary screenshot-btn ${sq ? 'active' : ''}`}
         onClick={getImage}
       >
-        Take Screenshot
+        Download Certificate
       </button>
 
       <div
