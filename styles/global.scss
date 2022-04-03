@@ -61,6 +61,15 @@ body {
     .text-input {
       height: 80%;
     }
+
+    .warning {
+      visibility: hidden;
+      color: red;
+    }
+    
+    .warning.active {
+      visibility: visible;
+    }
   }
 }
 

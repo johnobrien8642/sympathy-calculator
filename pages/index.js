@@ -50,7 +50,7 @@ export default function Home() {
           Sympathy Quotient (SQ) score.
         </p>
         <p>
-          Afterwards you'll receive an certificate with your SQ score. You can copy this certificate
+          Afterwards you'll receive a certificate with your SQ score. You can copy this certificate
           and attach it to your post, or share it with family and friends.
         </p>
         <p>
@@ -108,7 +108,7 @@ export default function Home() {
             {calculated ? 'Calculating...' : 'Calculate'}
           </button>
           <span
-            className={`${maxChars ? 'active ' : ''}warning`}
+            className={`warning ${maxChars ? 'active ' : ''}`}
           >
             2500 Characters Max
           </span>
