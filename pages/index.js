@@ -29,12 +29,11 @@ export default function Home() {
   return (
     <div className={`main-page container`}>
       <Head>
-        <title></title>
+        <title>Sympathy Calculator</title>
         <meta 
           name="description" 
-          content="This is a calculator to figure out exactly how much sympathy you're supposed to receive for your given situation" 
+          content="An A.I. powered calculator determing how much sympathy you should receive based on the description of your situation" 
         />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       
       <header
