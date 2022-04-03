@@ -6,6 +6,7 @@ export default function Home() {
   let [text, setText] = useState('')
   let [sq, setSQ] = useState('')
   let [maxChars, setMaxChars] = useState(false)
+  let [calculated, setCalculated] = useState(false)
   let sqScorePanelRef = useRef(null)
   const [image, takeScreenshot] = useScreenshot({
     type: "image/jpeg",
@@ -18,7 +19,6 @@ export default function Home() {
     a.click();
   };
   const getImage = () => takeScreenshot(sqScorePanelRef.current).then(download)
-
 
   useEffect(() => {
     if (sq) {
@@ -76,10 +76,12 @@ export default function Home() {
               const SQ = await res.json()
               setSQ(SQ.score)
             }
+            setCalculated(false)
           }}
         >
           <textarea
             className='text-input w-100'
+            disabled={calculated}
             value={text}
             onInput={e => {
               setText(e.target.value)
@@ -93,8 +95,12 @@ export default function Home() {
           <button
             className='btn btn-secondary'
             disabled={`${maxChars ? 'disabled' : ''}`}
+            onClick={() => {
+              setCalculated(true)
+            }}
           >
-            Calculate
+            <span className={`spinner-border me-1 calculating ${calculated ? 'active' : ''}`}></span>
+            {calculated ? 'Calculating...' : 'Calculate'}
           </button>
           <span
             className={`${maxChars ? 'active ' : ''}warning`}

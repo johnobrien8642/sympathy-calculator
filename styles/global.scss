@@ -34,6 +34,16 @@ html, body, #__next {
 
   .calculator-form {
     height: 80%;
+
+    .calculating {
+      display: none;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .calculating.active {
+      display: inline-block;
+    }
   
     button {
       margin-right: 1%;
